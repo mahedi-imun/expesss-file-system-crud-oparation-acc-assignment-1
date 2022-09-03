@@ -12,12 +12,15 @@ app.get("/", (req, res) => {
   res.send("server is running");
 });
 
-// ger random user data
-app.get("/user/random",  (req, res) => {
-  const users = fs.readFileSync(`${__dirname}/data/users.json`, "utf-8");
-  const user = JSON.parse(users)[Math.floor(Math.random() * JSON.parse(users).length)];
-  res.send(user);
+// ger random user data from json file
+app.get("/user/random", (req, res) => {
+  const users = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "data", "users.json"))
+  );
+  const randomUser = users[Math.floor(Math.random() * users.length)];
+  res.json(randomUser);
 });
+
 
 // get all users  Limit the number of users using query parameter
 app.get("/user/all", (req, res) => {
