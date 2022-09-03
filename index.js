@@ -12,12 +12,27 @@ app.get("/", (req, res) => {
   res.send("server is running");
 });
 
-// ger random user data from json file and file path
-app.get("/user/random",  (req, res) => {
-  const users = fs.readFileSync(`${__dirname}/data/users.json`);
-  const user = JSON.parse(users)[Math.floor(Math.random() * JSON.parse(users).length)];
-  res.send(user);
+// get random user data from json file and solve no such file or directory, path not found error
+app.get("/user/random", (req, res) => {
+  const filePath = path.join(__dirname, "data", "users.json");
+  fs.readFile(filePath, "utf-8", (err, data) => {
+    if (err) {
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
+    } else {
+      const users = JSON.parse(data);
+      const randomUser = users[Math.floor(Math.random() * users.length)];
+      res.status(200).json({
+        success: true,
+        data: randomUser,
+      });
+    }
+  });
 });
+
+
 
 
 
