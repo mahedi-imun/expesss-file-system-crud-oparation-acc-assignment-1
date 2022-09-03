@@ -60,7 +60,7 @@ app.patch("/user/update/:id", (req, res) => {
   else {
     res.status(404).send("User not found");
   }
-}),
+});
 
 // Update multiple users information in the .json file Take an array of user ids body. and validate the body
 app.patch("/user/bulk-update", (req, res) => {
@@ -84,10 +84,10 @@ app.patch("/user/bulk-update", (req, res) => {
 });
 
 // Delete a user from the .json file and its id validate the user id by delete request.
-app.delete("/user/delete/:id", (req, res) => {
+app.delete("/user/delete", (req, res) => {
   const users = fs.readFileSync("./data/users.json", "utf-8");
   const user = JSON.parse(users);
-  const id = Number(req.params.id);
+  const id = Number(req.body.id);
   const index = user.findIndex(user => user.id === id);
   if(!index){
     if (index !== -1) {
