@@ -5,6 +5,7 @@ const port = process.env.PORT || 5000;
 const errorHandler = require("./middleware/errorHandler");
 const fs = require("fs");
 const path = require("path");
+
 app.use(cors());
 app.use(express.json());
 
@@ -14,15 +15,10 @@ app.get("/", (req, res) => {
 
 // ger random user data from json file and file path
 app.get("/user/random",  (req, res) => {
-  const users = fs.readFileSync("./data/users.json", "utf-8");
+  const users = fs.readFileSync(path.join(__dirname, 'data/users.json'), 'utf8');
   const user = JSON.parse(users)[Math.floor(Math.random() * JSON.parse(users).length)];
   res.send(user);
 });
-
-
-
-
-
 // get all users  Limit the number of users using query parameter
 app.get("/user/all", (req, res) => {
   const users = fs.readFileSync("./data/users.json", "utf-8");
@@ -36,7 +32,7 @@ app.get("/user/all", (req, res) => {
 }),
 // Save a user in the .json file validate the body and check if all the required properties are present in the body.
 app.post("/user/save", (req, res) => {
-  const users = fs.readFileSync("./users.json", "utf-8");
+  const users = fs.readFileSync(".data/users.json", "utf-8");
   const user = JSON.parse(users);
   const newUser = req.body;
   if (newUser.id && newUser.name && newUser.contact && newUser.address && newUser.photoUrl && newUser.gender) {
