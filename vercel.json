@@ -5,6 +5,7 @@
     ],
     "routes": [
       {
+         "handle": "filesystem" ,
         "src": "/.*",
         "headers": {
             "Access-Control-Allow-Origin": "*",
