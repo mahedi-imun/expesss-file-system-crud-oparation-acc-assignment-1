@@ -4,8 +4,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 const errorHandler = require("./middleware/errorHandler");
 const fs = require("fs");
-const path = require("path");
-
+const path = require("path")
+;
 app.use(cors());
 app.use(express.json());
 
@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 // ger random user data from json file and file path
 app.get("/user/random",  (req, res) => {
-  const users = fs.readFileSync(path.join(__dirname, 'data/users.json'), 'utf8');
+  const users = fs.readFileSync(path.join(process.cwd(),'data/users.json'), 'utf8');
   const user = JSON.parse(users)[Math.floor(Math.random() * JSON.parse(users).length)];
   res.send(user);
 });
