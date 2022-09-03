@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 // ger random user data from json file and file path
 app.get("/user/random",  (req, res) => {
-  const users = fs.readFileSync(path.join(process.cwd(),'data/users.json'), 'utf8');
+  const users = fs.readFileSync('data/users.json', 'utf8');
   const user = JSON.parse(users)[Math.floor(Math.random() * JSON.parse(users).length)];
   res.send(user);
 });

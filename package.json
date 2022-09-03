@@ -1,5 +1,5 @@
 {
-  "name": "phero-final-project-server",
+  "name": "acc",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -23,5 +23,10 @@
     "nodemon": "^2.0.19",
     "stripe": "^10.3.0",
     "vercel": "^28.2.2"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }
