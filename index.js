@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 
 // ger random user data
 app.get("/user/random",  (req, res) => {
-  const users = fs.readFileSync("./data/users.json", "utf-8");
+  const users = fs.readFileSync(`${__dirname}/data/users.json`, "utf-8");
   const user = JSON.parse(users)[Math.floor(Math.random() * JSON.parse(users).length)];
   res.send(user);
 });
